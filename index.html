@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script>
+      let playerSelection = 9;
+      let computerSelection = "";
+
+      function getComputerChoice() {
+        let randNum = Math.floor(Math.random() * 3);
+
+        if (randNum === 0) {
+          computerSelection = "Rock";
+        } else if (randNum === 1) {
+          computerSelection = "Paper";
+        } else if (randNum === 2) {
+          computerSelection = "Scissors";
+        } else {
+          console.log("broken");
+        }
+        return computerSelection;
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        let playerChoice = playerSelection.toString().toLowerCase();
+
+        if (playerChoice === "rock") {
+          if (computerSelection === "Rock") {
+            return "Its a draw!";
+          } else if (computerSelection === "Paper") {
+            return "You Lose! Paper beats Rock";
+          } else if (computerSelection === "Scissors") {
+            return "You Win! Rock beats Scissors";
+          }
+        } else if (playerChoice === "paper") {
+          if (computerSelection === "Rock") {
+            return "You Win! Paper beats Rock!";
+          } else if (computerSelection === "Paper") {
+            return "Its a draw!";
+          } else if (computerSelection === "Scissors") {
+            return "You Lose! Scissors beats Paper";
+          }
+        } else if (playerChoice === "scissors") {
+          if (computerSelection === "Rock") {
+            return "You Lose! Rock beats Scissors";
+          } else if (computerSelection === "Paper") {
+            return "You Win! Scissors beats Paper";
+          } else if (computerSelection === "Scissors") {
+            return "Its a draw!";
+          }
+        } else {
+          return "Something broke";
+        }
+      }
+
+      playerSelection = "rock";
+      computerSelection = getComputerChoice();
+      console.log(playRound(playerSelection, computerSelection));
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          playRound();
+        }
+      }
+    </script>
+  </body>
+</html>
