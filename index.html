@@ -5,11 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <style>
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 16px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      button {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
   </head>
   <body>
+    <h1>rock paper scissors</h1>
+    <section>
+      <div>First to 5 points wins</div>
+      <div class="score">
+        <div>
+          Player score:
+          <div class="player__score"></div>
+        </div>
+        <div>
+          Computer score:
+          <div class="computer__score"></div>
+        </div>
+      </div>
+      <div class="results">Score</div>
+    </section>
+    <section>
+      <div>
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+      </div>
+    </section>
     <script>
       let playerSelection = "";
       let computerSelection = "";
+      let totalPlayerScore = 0;
+      let totalComputerScore = 0;
+
+      const rock = document.querySelector(".rock");
+      const paper = document.querySelector(".paper");
+      const scissors = document.querySelector(".scissors");
+      const result = document.querySelector(".results");
+      const playerScore = document.querySelector(".player__score");
+      const computerScore = document.querySelector(".computer__score");
 
       function getComputerChoice() {
         let randNum = Math.floor(Math.random() * 3);
@@ -27,46 +75,45 @@
       }
 
       function getPlayerChoice() {
-        let playerChoice = prompt("Rock, Paper, or Scissors?");
-        playerSelection = playerChoice.toLowerCase();
-
-        while (1) {
-          if (
-            playerSelection == "rock" ||
-            playerSelection == "paper" ||
-            playerSelection == "scissors"
-          ) {
-            return playerSelection;
-          } else {
-            playerChoice = prompt(
-              "Invalid selection. Please choose Rock, Paper, or Scissors?"
-            );
-            playerSelection = playerChoice.toLowerCase();
-          }
-        }
+        playerSelection = "rock";
+        console.log(playerSelection);
+        return playerSelection;
       }
 
       function playRound(playerSelection, computerSelection) {
+        if (totalComputerScore == 5) {
+          return (totalComputerScore = 5);
+        } else if (totalPlayerScore == 5) {
+          return (totalPlayerScore = 5);
+        } else {
+        }
+
         if (playerSelection === "rock") {
           if (computerSelection === "Rock") {
             return "Its a draw!";
           } else if (computerSelection === "Paper") {
+            totalComputerScore += 1;
             return "You Lose! Paper beats Rock";
           } else if (computerSelection === "Scissors") {
+            totalPlayerScore += 1;
             return "You Win! Rock beats Scissors";
           }
         } else if (playerSelection === "paper") {
           if (computerSelection === "Rock") {
+            totalPlayerScore += 1;
             return "You Win! Paper beats Rock!";
           } else if (computerSelection === "Paper") {
             return "Its a draw!";
           } else if (computerSelection === "Scissors") {
+            totalComputerScore += 1;
             return "You Lose! Scissors beats Paper";
           }
         } else if (playerSelection === "scissors") {
           if (computerSelection === "Rock") {
+            totalComputerScore += 1;
             return "You Lose! Rock beats Scissors";
           } else if (computerSelection === "Paper") {
+            totalPlayerScore += 1;
             return "You Win! Scissors beats Paper";
           } else if (computerSelection === "Scissors") {
             return "Its a draw!";
@@ -76,11 +123,60 @@
         }
       }
 
-      function game() {
-        for (let i = 0; i < 5; i++) {
-          console.log(playRound(getPlayerChoice(), getComputerChoice()));
+      rock.addEventListener("click", () => {
+        playerSelection = "rock";
+        result.textContent = playRound(playerSelection, getComputerChoice());
+        playerScore.textContent = totalPlayerScore;
+        computerScore.textContent = totalComputerScore;
+        if (totalComputerScore == 5) {
+          document.body.style.backgroundColor = "red";
+
+          return (result.textContent = "COMPUTER WINS 0101100101011");
+        } else if (totalPlayerScore == 5) {
+          document.body.style.backgroundColor = "green";
+          return (result.textContent = "YOU BEAT A COMPUTER LOL XD");
+        } else {
         }
-      }
+      });
+
+      paper.addEventListener("click", () => {
+        playerSelection = "paper";
+        result.textContent = playRound(playerSelection, getComputerChoice());
+        playerScore.textContent = totalPlayerScore;
+        computerScore.textContent = totalComputerScore;
+        if (totalComputerScore == 5) {
+          document.body.style.backgroundColor = "red";
+
+          return (result.textContent = "COMPUTER WINS 0101100101011");
+        } else if (totalPlayerScore == 5) {
+          document.body.style.backgroundColor = "green";
+          return (result.textContent = "YOU BEAT A COMPUTER LOL XD");
+        } else {
+        }
+      });
+
+      scissors.addEventListener("click", () => {
+        playerSelection = "scissors";
+        result.textContent = playRound(playerSelection, getComputerChoice());
+        playerScore.textContent = totalPlayerScore;
+        computerScore.textContent = totalComputerScore;
+        if (totalComputerScore == 5) {
+          document.body.style.backgroundColor = "red";
+
+          return (result.textContent = "COMPUTER WINS 0101100101011");
+        } else if (totalPlayerScore == 5) {
+          document.body.style.backgroundColor = "green";
+
+          return (result.textContent = "YOU BEAT A COMPUTER LOL XD");
+        } else {
+        }
+      });
+
+      // function game() {
+      //   for (let i = 0; i < 5; i++) {
+      //     console.log(playRound(getPlayerChoice(), getComputerChoice()));
+      //   }
+      // }
     </script>
   </body>
 </html>
